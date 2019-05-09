@@ -1,17 +1,18 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <QR></QR>
   </div>
 </template>
 
 <script>
 import HelloWorld from './components/HelloWorld.vue'
+import QR from './components/QR.vue'
 
 export default {
   name: 'app',
   components: {
-    HelloWorld
+    HelloWorld,
+    QR
   }
 }
 </script>
@@ -21,8 +22,10 @@ export default {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
 }
+/* .dont-print{
+  display: block;
+} */
+
+
 </style>
