@@ -3,6 +3,7 @@
     <div class="dont-print">
       <div class="dont-print-container">
         <div class="properties-container">
+          <h1>Edit</h1>
           <div class="keychain-properties">Keychain Width (cm) <input type="number" step="0.1" v-model="keychainWidth"></div>
           <div class="keychain-properties">Keychain Height (cm) <input type="number" step="0.1" v-model="keychainHeight"></div>
           <div class="keychain-properties">Margin button (cm) <input type="number" step="0.1" v-model="marginButtom"></div>
@@ -20,13 +21,14 @@
           <div class="keychain-properties">Gym ID <input type="text" v-model="dataGymID"> Data preview: {{data(9999)}}</div>
           <div class="keychain-properties">Data quantity <input type="number" step="1" v-model="dataQuantity" @change="setData()"></div>
         </div>
-        <div class="qr-editor-container">
+        <div class="qr-editor-container">          
           <div class="qr-editor">
             <div class="qr-dot" v-for="dot in dots" :key="dot.id" @click="dot.show=!dot.show" :style="dot.show?'background-color:#00000008':'background-color:#999'">{{dot.id}}</div>
           </div>
           <img class="qr-dot-logo" :style="'width:' + logoWidth*6 + 'px'" :src="logoSrc==''?'logo.png':logoSrc">
         </div>
         <div>
+          <h1>Preview</h1>
           <KeyChain
             :keychainWidth="keychainWidth"
             :keychainHeight="keychainHeight"
@@ -46,8 +48,9 @@
         </div>
       </div>
       
-      <div class="keychain-properties"><button @click="print()">PRINT</button></div>
+      <div class="keychain-properties"><button @click="print()">PRINT</button> Select Print to PDF and print the PDF File</div>
       <hr>
+      <h1>Print Preview</h1>
     </div>
     <div class="print-me">
       <KeyChain v-for="code in codes" :key="code"
@@ -149,6 +152,11 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style>
+h1{
+  margin: unset;
+  text-align: left;
+  font-size:1.2em;
+}
 .dont-print-container{
   display: flex;
 }
