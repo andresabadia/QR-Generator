@@ -1,5 +1,9 @@
 <template>
     <div class="keychain" :style="'width:' + keychainWidth + 'cm; height:' + keychainHeight + 'cm;'">
+      <div class="upper-left"></div>
+      <div class="upper-right"></div>
+      <div class="bottom-left"></div>
+      <div class="bottom-right"></div>
       <div :style="'height:'+marginButtom+'cm; width:'+keychainWidth+'cm'"></div>
       <div class="qr-code-container" :style="'transform: scale(' + qrScale + '); margin-bottom:-'+(qrWidth-qrWidth*qrScale)/2+'px'">
         <img class="qr-code" :style="'width:' + qrWidth + 'px'" :src="'https://api.qrserver.com/v1/create-qr-code/?size=300x300&data='+data(code)+'&ecc=H&format=svg'" alt="" title="" />
@@ -10,6 +14,7 @@
       </div>
       <div class="keychain-string" :style="'font-size:' + stringSize + 'pt; margin-bottom:-'+(qrWidth-qrWidth*qrScale)/2+'px;'">ID: {{code}}</div>
       <div class="keychain-title" :style="'font-size:' + titleSize + 'pt; margin-bottom:' + titleMarginBottom + 'cm'" >{{title}}</div>
+      <img class="title-logo" :style="'width:' + titleLogoWidth + 'px; margin-bottom:'+titleLogoMarginBottom+'cm'" alt="Vue logo" :src="titleLogoSrc==''?'logo.png':titleLogoSrc">
     </div>
 </template>
 
@@ -22,10 +27,13 @@ export default {
     'qrScale',
     'logoSrc',
     'logoWidth',
+    'titleLogoSrc',
+    'titleLogoWidth',
     'marginButtom',
     'title',
     'titleSize',
     'titleMarginBottom',
+    'titleLogoMarginBottom',
     'stringSize',
     'dataGymID',
     'code',

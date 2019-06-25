@@ -8,15 +8,18 @@
           <div class="keychain-properties">Keychain Height (cm) <input type="number" step="0.1" v-model="keychainHeight"></div>
           <div class="keychain-properties">Margin button (cm) <input type="number" step="0.1" v-model="marginButtom"></div>
           <div class="keychain-properties">---</div>
-          <div class="keychain-properties">Select logo <input type="file" accept="image/png" @change="setLogo($event)"></div>
-          <div class="keychain-properties">Logo width and height (px) <input type="number" step="1" v-model="logoWidth"></div>
-          <div class="keychain-properties">QR width and height (px) <input type="number" step="29" v-model="qrWidth"></div>
-          <div class="keychain-properties">QR and Logo Scale factor <input type="number" step="0.05" max="1" v-model="qrScale"></div>
-          <div class="keychain-properties">---</div>
+          <div class="keychain-properties">Select Title Logo <input type="file" accept="image/png" @change="setTitleLogo($event)"></div>
+          <div class="keychain-properties">Title Logo width and height (px) <input type="number" step="1" v-model="titleLogoWidth"></div>
+          <div class="keychain-properties">Title Logo margin button (cm) <input type="number" step="0.1" v-model="titleLogoMarginBottom"></div>
           <div class="keychain-properties">Title <input type="text" v-model="title"></div>
           <div class="keychain-properties">Title font size (pt) <input type="number" step="0.5" v-model="titleSize"></div>
           <div class="keychain-properties">Title margin button (cm) <input type="number" step="0.1" v-model="titleMarginBottom"></div>
           <div class="keychain-properties">String font size (pt) <input type="number" step="0.5" v-model="stringSize"></div>
+          <div class="keychain-properties">---</div>
+          <div class="keychain-properties">Select logo <input type="file" accept="image/png" @change="setLogo($event)"></div>
+          <div class="keychain-properties">Logo width and height (px) <input type="number" step="1" v-model="logoWidth"></div>
+          <div class="keychain-properties">QR width and height (px) <input type="number" step="29" v-model="qrWidth"></div>
+          <div class="keychain-properties">QR and Logo Scale factor <input type="number" step="0.05" max="1" v-model="qrScale"></div>
           <div class="keychain-properties">---</div>
           <div class="keychain-properties">Gym ID <input type="text" v-model="dataGymID"> Data preview: {{data(9999)}}</div>
           <div class="keychain-properties">Data quantity <input type="number" step="1" v-model="dataQuantity" @change="setData()"></div>
@@ -25,7 +28,7 @@
           <div class="qr-editor">
             <div class="qr-dot" v-for="dot in dots" :key="dot.id" @click="dot.show=!dot.show" :style="dot.show?'background-color:#00000008':'background-color:#999'">{{dot.id}}</div>
           </div>
-          <img class="qr-dot-logo" :style="'width:' + logoWidth*6 + 'px'" :src="logoSrc==''?'logo.png':logoSrc">
+          <img class="qr-dot-logo" :style="'width:' + 210*(logoWidth/logoSize) + 'px'" :src="logoSrc==''?'logo.png':logoSrc">
         </div>
         <div>
           <h1>Preview</h1>
@@ -36,6 +39,9 @@
             :qrScale="qrScale"
             :logoSrc="logoSrc"
             :logoWidth="logoWidth"
+            :titleLogoSrc="titleLogoSrc"
+            :titleLogoWidth="titleLogoWidth"
+            :titleLogoMarginBottom="titleLogoMarginBottom"
             :dots="dots"
             :marginButtom="marginButtom"
             :title="title"
@@ -60,6 +66,9 @@
         :qrScale="qrScale"
         :logoSrc="logoSrc"
         :logoWidth="logoWidth"
+        :titleLogoSrc="titleLogoSrc"
+        :titleLogoWidth="titleLogoWidth"
+        :titleLogoMarginBottom="titleLogoMarginBottom"
         :dots="dots"
         :marginButtom="marginButtom"
         :title="title"
@@ -90,8 +99,11 @@ export default {
       qrWidth:145,
       qrScale:0.9,
       logoSrc: "",
+      titleLogoSrc: "",
       logoWidth:30,
+      titleLogoWidth:100,
       marginButtom:0.2,
+      titleLogoMarginBottom:0.2,
       title: "Title",
       titleSize:15,
       titleMarginBottom: 0,
@@ -107,7 +119,6 @@ export default {
   },
   computed:{
     logoSize(){
-      this.logoWidth=this.qrWidth*7/29
       return this.qrWidth*7/29
     }
   },
@@ -123,6 +134,19 @@ export default {
         reader.readAsDataURL(file)
       } else {
         this.logoSrc =''
+      }      
+    },
+    setTitleLogo(ev){
+      if(ev.target.files && ev.target.files[0]){
+        const file = ev.target.files[0]
+        const reader = new FileReader()
+        reader.onload = e => {
+          // console.log('reader', e.target.result)
+          this.titleLogoSrc = e.target.result
+        }
+        reader.readAsDataURL(file)
+      } else {
+        this.titleLogoSrc =''
       }      
     },
     data(code){
@@ -200,6 +224,7 @@ h1{
   border-radius: 10px;
   display: flex;
   flex-direction: column-reverse;
+  position: relative;
 }
 .print-me .keychain{
   float: left;
@@ -216,10 +241,24 @@ h1{
 .qr-code-container .logo{
   position: absolute;
 }
+.title-logo{
+  margin: auto;
+}
 .logo-background{
   display: flex;
   flex-wrap: wrap;
  }
+ 
+:root{
+  --border-color:lightgrey;
+}
+.upper-left, .upper-right, .bottom-left, .bottom-right{
+  position: absolute;
+  height: 0.15cm;
+  width: 0.15cm;
+  /* background: red; */
+  border:unset;
+}
 
 
 @media print {
@@ -237,6 +276,30 @@ h1{
   }
   .keychain{
     border: unset;
+  }  
+  .upper-left{
+    top:0;
+    left: 0;
+    border-top: 1px solid var(--border-color);
+    border-left: 1px solid var(--border-color);
+  }
+  .upper-right{
+    top:0;
+    right: 0;
+    border-top: 1px solid var(--border-color);
+    border-right: 1px solid var(--border-color);
+  }
+  .bottom-left{
+    bottom:0;
+    left: 0;
+    border-bottom: 1px solid var(--border-color);
+    border-left: 1px solid var(--border-color);
+  }
+  .bottom-right{
+    bottom:0;
+    right: 0;
+    border-bottom: 1px solid var(--border-color);
+    border-right: 1px solid var(--border-color);
   }
 }
 </style>
