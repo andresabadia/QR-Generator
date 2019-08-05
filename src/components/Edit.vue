@@ -22,7 +22,8 @@
           <div class="keychain-properties">QR and Logo Scale factor <input type="number" step="0.05" max="1" v-model="qrScale"></div>
           <div class="keychain-properties">---</div>
           <div class="keychain-properties">Gym ID <input type="text" v-model="dataGymID"> Data preview: {{data(9999)}}</div>
-          <div class="keychain-properties">Data quantity <input type="number" step="1" v-model="dataQuantity" @change="setData()"></div>
+          <div class="keychain-properties">Data from <input type="number" step="1" v-model="dataFrom" @change="setData()"></div>
+          <div class="keychain-properties">Data to <input type="number" step="1" v-model="dataTo" @change="setData()"></div>
         </div>
         <div class="qr-editor-container">          
           <div class="qr-editor">
@@ -110,6 +111,8 @@ export default {
       stringSize:10,
       dataGymID:'zz',
       dataQuantity: 5,
+      dataFrom: 1,
+      dataTo: 5,
       codes:[
         1,2,3,4,5
       ],
@@ -163,8 +166,8 @@ export default {
     },
     setData(){
       this.codes=[]
-      for(let i=0; i<this.dataQuantity; i++){
-        this.codes.push(i+1)
+      for(let i=this.dataFrom; i<=this.dataTo; i++){
+        this.codes.push(i)
       }
     },
     print(){
