@@ -171,7 +171,9 @@ export default {
       for(let i=this.dataFrom; i<=this.dataTo; i++){
         this.codes.push(i)
       }
-      this.dataCustom.split(",").forEach(data=>this.codes.push(data));
+      let dataCustom = this.dataCustom.split("\n").join("");
+      dataCustom = dataCustom.split(" ").join("");
+      dataCustom.split(",").forEach(data=>this.codes.push(data));
     },
     print(){
       window.print()
