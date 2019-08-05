@@ -24,6 +24,7 @@
           <div class="keychain-properties">Gym ID <input type="text" v-model="dataGymID"> Data preview: {{data(9999)}}</div>
           <div class="keychain-properties">Data from <input type="number" step="1" v-model="dataFrom" @change="setData()"></div>
           <div class="keychain-properties">Data to <input type="number" step="1" v-model="dataTo" @change="setData()"></div>
+          <div class="keychain-properties">Custom Data<input type="text" v-model="dataCustom" @change="setData()"></div>
         </div>
         <div class="qr-editor-container">          
           <div class="qr-editor">
@@ -113,8 +114,9 @@ export default {
       dataQuantity: 5,
       dataFrom: 1,
       dataTo: 5,
+      dataCustom:"6,7",
       codes:[
-        1,2,3,4,5
+        1,2,3,4,5,6,7
       ],
       dots:[]
 
@@ -169,6 +171,7 @@ export default {
       for(let i=this.dataFrom; i<=this.dataTo; i++){
         this.codes.push(i)
       }
+      this.dataCustom.split(",").forEach(data=>this.codes.push(data));
     },
     print(){
       window.print()
