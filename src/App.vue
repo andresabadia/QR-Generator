@@ -5,14 +5,14 @@
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+// import HelloWorld from './components/HelloWorld.vue'
 // import QR from './components/QR.vue'
 import Edit from './components/Edit.vue'
 
 export default {
   name: 'app',
   components: {
-    HelloWorld,
+    // HelloWorld,
     // QR,
     Edit
   }
