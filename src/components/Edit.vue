@@ -66,14 +66,7 @@
             Sticker Margin Y (cm)
             <input type="number" step="0.01" v-model="stickerMarginY" />
           </div>
-          <div class="keychain-properties">
-            page to page left (cm)
-            <input type="number" step="0.01" v-model="paddingLeft" />
-          </div>
-          <div class="keychain-properties">
-            page to page top (cm)
-            <input type="number" step="0.01" v-model="paddingTop" />
-          </div>
+
           <div class="keychain-properties">
             Data <textarea v-model="qrCodes" @input="setData()"></textarea>
           </div>
@@ -88,6 +81,7 @@
           <div>
             <h1>Preview</h1>
             <KeyChain
+              style="transform: scale(2); transform-origin: top left;"
               :keychainWidth="keychainWidth"
               :keychainHeight="keychainHeight"
               :logoGap="logoGap"
@@ -121,7 +115,7 @@
       <hr />
       <h1>Print Preview</h1>
     </div>
-    <div class="print-me" :style="'padding-left: ' + paddingLeft + 'cm; padding-top: ' + paddingTop + 'cm'">
+    <div class="print-me">
       <KeyChain
         :style="'margin: ' + stickerMarginX + 'cm ' + stickerMarginY + 'cm'"
         v-for="code in codes"
@@ -167,14 +161,14 @@ export default {
     return {
       keychainWidth: 1.69,
       keychainHeight: 3.05,
-      qrWidth: 30,
-      qrGap: 0.3,
-      qrWidth2: 50,
+      qrWidth: 40,
+      qrGap: 0.25,
+      qrWidth2: 46,
       qrScale: 1,
       logoSrc: "",
       titleLogoSrc: "",
-      logoWidth: 30,
-      titleLogoWidth: 20,
+      logoWidth: 12,
+      titleLogoWidth: 12,
       marginButtom: 0.1,
       titleLogoMarginBottom: 0.2,
       title: "Title",
@@ -190,10 +184,8 @@ export default {
       dots: [],
       qrCodes: "9999_SR_950123;9998_SR_950123;9997_SR_950123;9996_SR_950123",
       logoGap: 0.1,
-      stickerMarginX: 0.1,
+      stickerMarginX: 0.125,
       stickerMarginY: 0,
-      paddingLeft: 0.5,
-      paddingTop: 0.5,
     };
   },
   computed: {
@@ -308,6 +300,11 @@ h1 {
 }
 .keychain-title {
   font-weight: bold;
+}
+.keychain-string {
+  margin-top: 1px;
+  font-weight: bold;
+  letter-spacing: -0.4px;
 }
 .qr-code-container {
   display: flex;

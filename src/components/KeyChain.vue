@@ -40,7 +40,7 @@
       />
     </div>
     <div
-      class="keychain-string"
+      class="keychain-string oxygen-mono-regular"
       :style="
         'font-size:' +
           stringSize +
@@ -77,7 +77,7 @@
       />
     </div>
     <div
-      class="keychain-string"
+      class="keychain-string oxygen-mono-regular"
       :style="
         'font-size:' +
           stringSize +
