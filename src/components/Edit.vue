@@ -67,6 +67,14 @@
             <input type="number" step="0.01" v-model="stickerMarginY" />
           </div>
           <div class="keychain-properties">
+            page to page left (cm)
+            <input type="number" step="0.01" v-model="paddingLeft" />
+          </div>
+          <div class="keychain-properties">
+            page to page top (cm)
+            <input type="number" step="0.01" v-model="paddingTop" />
+          </div>
+          <div class="keychain-properties">
             Data <textarea v-model="qrCodes" @input="setData()"></textarea>
           </div>
           <!-- <div class="qr-editor-container">          
@@ -113,7 +121,7 @@
       <hr />
       <h1>Print Preview</h1>
     </div>
-    <div class="print-me">
+    <div class="print-me" :style="'padding-left: ' + paddingLeft + 'cm; padding-top: ' + paddingTop + 'cm'">
       <KeyChain
         :style="'margin: ' + stickerMarginX + 'cm ' + stickerMarginY + 'cm'"
         v-for="code in codes"
@@ -184,6 +192,8 @@ export default {
       logoGap: 0.1,
       stickerMarginX: 0.1,
       stickerMarginY: 0,
+      paddingLeft: 0.5,
+      paddingTop: 0.5,
     };
   },
   computed: {
