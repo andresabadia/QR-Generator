@@ -27,7 +27,7 @@
           :src="
             'https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=' +
               data(code) +
-              '&ecc=Q&format=svg'
+              '&ecc=M&format=svg'
           "
           alt=""
           title=""
@@ -70,7 +70,7 @@
         :src="
           'https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=' +
             data(code) +
-            '&ecc=Q&format=svg'
+            '&ecc=M&format=svg'
         "
         alt=""
         title=""
