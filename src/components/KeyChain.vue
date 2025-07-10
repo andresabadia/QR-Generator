@@ -33,27 +33,29 @@
           title=""
         />
       </div>
-      <img
-        :style="'width:' + titleLogoWidth + 'px;'"
-        alt="Vue logo"
-        :src="logoSrc == '' ? 'logo.png' : logoSrc"
-      />
+      <div class="logo-container">
+        <img
+          :style="'width:' + titleLogoWidth + 'px;'"
+          alt="Vue logo"
+          :src="logoSrc == '' ? 'logo.png' : logoSrc"
+        />
+        <div
+          class="keychain-string oxygen-mono-regular logo-string"
+          :style="
+            'font-size:' +
+              stringSizeLogo +
+              'pt; height: calc(' +
+              stringSizeLogo +
+              'pt * 2.251); width: ' +
+              stringSizeLogo +
+              'pt'
+          "
+        >
+          {{ shortData(code) }}
+        </div>
+      </div>
     </div>
-    <div
-      class="keychain-string oxygen-mono-regular"
-      :style="
-        'font-size:' +
-          stringSize +
-          'pt; margin-bottom:-' +
-          (qrWidth - qrWidth * qrScale) / 2 +
-          'px;'
-      "
-    >
-      {{ data(code) }}
-    </div>
-    <div
-      :style="'height:' + qrGap + 'cm; width:' + keychainWidth + 'cm'"
-    ></div>
+    <div :style="'height:' + qrGap + 'cm; width:' + keychainWidth + 'cm'"></div>
     <div
       class="qr-code-container"
       :style="
@@ -108,6 +110,7 @@ export default {
     "titleMarginBottom",
     "titleLogoMarginBottom",
     "stringSize",
+    "stringSizeLogo",
     "dataGymID",
     "code",
     "dots",
@@ -146,6 +149,9 @@ export default {
     },
     data(code) {
       return code;
+    },
+    shortData(code) {
+      return code.split("_")[0];
     },
   },
 };

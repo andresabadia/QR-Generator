@@ -29,6 +29,10 @@
           <!-- <div class="keychain-properties">Title font size (pt) <input type="number" step="0.5" v-model="titleSize"></div> -->
           <!-- <div class="keychain-properties">Title margin button (cm) <input type="number" step="0.1" v-model="titleMarginBottom"></div> -->
           <div class="keychain-properties">
+            String font size logo (pt)
+            <input type="number" step="0.5" v-model="stringSizeLogo" />
+          </div>
+          <div class="keychain-properties">
             String font size (pt)
             <input type="number" step="0.5" v-model="stringSize" />
           </div>
@@ -100,6 +104,7 @@
               :titleSize="titleSize"
               :titleMarginBottom="titleMarginBottom"
               :stringSize="stringSize"
+              :stringSizeLogo="stringSizeLogo"
               :dataGymID="dataGymID"
               code="9999_SR_950123"
             >
@@ -138,6 +143,7 @@
         :titleSize="titleSize"
         :titleMarginBottom="titleMarginBottom"
         :stringSize="stringSize"
+        :stringSizeLogo="stringSizeLogo"
         :dataGymID="dataGymID"
         :code="code"
       >
@@ -174,6 +180,7 @@ export default {
       title: "Title",
       titleSize: 15,
       titleMarginBottom: 0,
+      stringSizeLogo: 8,
       stringSize: 5,
       dataGymID: "zz",
       dataQuantity: 5,
@@ -321,6 +328,22 @@ h1 {
 .logo-background {
   display: flex;
   flex-wrap: wrap;
+}
+.logo-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  height: 100%;
+  position: relative;
+}
+.logo-string {
+  margin: 0;
+  margin-top: 2px;
+  transform: rotate(90deg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 :root {
